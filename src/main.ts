@@ -47,15 +47,16 @@ async function main() {
   });
 
   try {
+    const base = import.meta.env.BASE_URL;
     const tshirt = await loadTshirt(viewer.scene, {
-      glbUrl: '/tshirt.glb',
-      normalMapUrl: '/fabric_normal.png',
+      glbUrl: `${base}tshirt.glb`,
+      normalMapUrl: `${base}fabric_normal.png`,
       colorMap: bridge.texture,
     });
     viewer.fit(tshirt.root);
     statusEl.textContent = 'Ready — drag to orbit, scroll to zoom';
 
-    const guideTex = await new THREE.TextureLoader().loadAsync('/template-guide.png');
+    const guideTex = await new THREE.TextureLoader().loadAsync(`${base}template-guide.png`);
     guideTex.colorSpace = THREE.SRGBColorSpace;
     guideTex.flipY = false;
     guideTex.anisotropy = 8;
