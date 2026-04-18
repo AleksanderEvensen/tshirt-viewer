@@ -1,0 +1,12 @@
+node_modules/
+dist/
+tsconfig.tsbuildinfo
+.DS_Store
+*.log
+
+# Source art — not needed for the web build
+*.blend
+*.blend1
+*.psd
+*.abc
+assets/

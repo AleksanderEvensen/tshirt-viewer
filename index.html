@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>T-Shirt Viewer</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <section id="editor-pane">
+        <header class="pane-header">
+          <h2>Design</h2>
+          <div class="toolbar">
+            <input id="file-input" type="file" accept="image/*" multiple hidden />
+            <button id="btn-upload" type="button">Upload image</button>
+            <button id="btn-forward" type="button">Forward</button>
+            <button id="btn-backward" type="button">Back</button>
+            <button id="btn-delete" type="button">Delete</button>
+            <button id="btn-reset" type="button">Reset</button>
+            <button id="btn-uv-debug" type="button" title="Render the template guide directly onto the model to verify UV layout">UV guide</button>
+            <label class="color-pick">
+              Shirt
+              <input id="color-input" type="color" value="#ffffff" />
+            </label>
+          </div>
+        </header>
+        <div id="editor-surface">
+          <img class="template-guide" src="/template-guide.png" alt="" />
+          <canvas id="design-canvas" width="2048" height="2048"></canvas>
+          <div class="drop-hint">Drop images here</div>
+        </div>
+      </section>
+      <section id="viewer-pane">
+        <header class="pane-header">
+          <h2>Preview</h2>
+          <span id="viewer-status">Loading model…</span>
+        </header>
+        <div id="viewer-surface"></div>
+      </section>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
