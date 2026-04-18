@@ -9,4 +9,4 @@ tsconfig.tsbuildinfo
 *.blend1
 *.psd
 *.abc
-assets/
+/assets/
