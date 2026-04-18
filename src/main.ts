@@ -5,6 +5,9 @@ import { createTextureBridge } from './viewer/texture-bridge';
 import { createDesignCanvas } from './editor/canvas';
 import { attachUploadHandlers } from './editor/upload';
 import { attachToolbarHandlers } from './editor/tools';
+import tshirtModelUrl from './assets/tshirt.glb?url';
+import fabricNormalUrl from './assets/fabric_normal.png?url';
+import templateGuideUrl from './assets/template-guide.png?url';
 
 const TEXTURE_SIZE = 2048;
 
@@ -12,6 +15,8 @@ async function main() {
   const statusEl = document.getElementById('viewer-status')!;
   const surfaceEl = document.getElementById('editor-surface')!;
   const viewerSurface = document.getElementById('viewer-surface')!;
+
+  (surfaceEl.querySelector('img.template-guide') as HTMLImageElement).src = templateGuideUrl;
 
   const designCanvas = createDesignCanvas('design-canvas', TEXTURE_SIZE);
   const bridge = createTextureBridge(designCanvas, TEXTURE_SIZE);
@@ -47,16 +52,15 @@ async function main() {
   });
 
   try {
-    const base = import.meta.env.BASE_URL;
     const tshirt = await loadTshirt(viewer.scene, {
-      glbUrl: `${base}tshirt.glb`,
-      normalMapUrl: `${base}fabric_normal.png`,
+      glbUrl: tshirtModelUrl,
+      normalMapUrl: fabricNormalUrl,
       colorMap: bridge.texture,
     });
     viewer.fit(tshirt.root);
     statusEl.textContent = 'Ready — drag to orbit, scroll to zoom';
 
-    const guideTex = await new THREE.TextureLoader().loadAsync(`${base}template-guide.png`);
+    const guideTex = await new THREE.TextureLoader().loadAsync(templateGuideUrl);
     guideTex.colorSpace = THREE.SRGBColorSpace;
     guideTex.flipY = false;
     guideTex.anisotropy = 8;
